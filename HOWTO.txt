@@ -1,0 +1,12 @@
+$ python3 setup.py install
+$ python3
+
+>>> from espnff import League
+>>> leagueId = 321933
+>>> year = 2017
+// From Cookie
+>>> swid = "{CF265EC7-6EFC-48CE-9C8E-12E253956A38}"
+>>> espn_s2 = "AEAqsjAvmSc6HiiUfRoaCFWpRqYjE3EirDT9gFumrudCZwLbsnpAIPwyuf9sKsoyd9kru5UCNXWtXhh%2B%2Bg8v%2BHVWHDPonclDicrpbLg2UmmWczGPMM95CZEkTixCxU3rZ8JlIDTEWrutGN%2FZxsf4PcIN7WpzO5JK67hNoOyYO%2FQAQipR2A8Z9CH5dhqguBQ2wU4jiX%2Bo7crvxceGSlsbgv0GbCEtFXqdTiHLyQ2AlbJnjYNWmSQLaxkMDxRrdiq5NtrRgdknC5NYbYuyeb47iNyK"
+>>> toFile = True
+>>> league = League(leagueId, year, espn_s2, swid, toFile);
+

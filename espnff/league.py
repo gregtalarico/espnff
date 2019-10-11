@@ -1,5 +1,5 @@
 import requests
-
+import json
 from .utils import (two_step_dominance,
                     power_points, )
 from .team import Team
@@ -12,11 +12,12 @@ from .exception import (PrivateLeagueException,
 
 class League(object):
     '''Creates a League instance for Public ESPN league'''
-    def __init__(self, league_id, year, espn_s2=None, swid=None):
+    def __init__(self, league_id, year, espn_s2=None, swid=None, toFile=None):
         self.league_id = league_id
         self.year = year
         self.ENDPOINT = "http://games.espn.com/ffl/api/v2/"
         self.teams = []
+        self.toFile = toFile
         self.espn_s2 = espn_s2
         self.swid = swid
         self._fetch_league()
@@ -40,6 +41,10 @@ class League(object):
         r = requests.get('%sleagueSettings' % (self.ENDPOINT, ), params=params, cookies=cookies)
         self.status = r.status_code
         data = r.json()
+
+        if self.toFile:
+            with open(str(self.league_id) + '_' + str(self.year) + '.json', 'w') as f:
+                json.dump(data, f, ensure_ascii=False)
 
         if self.status == 401:
             raise PrivateLeagueException(data['error'][0]['message'])
